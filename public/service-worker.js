@@ -6,8 +6,8 @@ const FILES_TO_CACHE = [
     "/assets/icons/icon-512x512.png"
 ];
 
-const CACHE_NAME = 'static-cache-v2';
-const DATA_CACHE_NAME ='data-cache-v1';
+const STATIC_CACHE = 'static-cache-v2';
+const RUNTIME_CACHE ='runtime-cache';
 
 self.addEventListener("install", event => {
   event.waitUntil(
@@ -52,7 +52,7 @@ self.addEventListener("fetch", event => {
   }
 
   // handle runtime GET requests for data from /api routes
-  if (event.request.url.includes("/api/images")) {
+  if (event.request.url.includes("/api/transaction")) {
     // make network request and fallback to cache if network request fails (offline)
     event.respondWith(
       caches.open(RUNTIME_CACHE).then(cache => {
